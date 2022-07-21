@@ -1,6 +1,24 @@
 class JackTokenizer:
-    def __init__(self, jack_input):
-        pass
+    def __init__(self, jack_input_string):
+        self.jack_input = open(jack_input_string, "r")
+
+        # read every string and remove whitespace, comments, and newlines.
+        current_lines = self.jack_input.readlines()
+
+        for line in current_lines:
+            stripped_line = line.strip(" ").strip("\n").strip(" ")
+
+            if stripped_line[0:2] == "//" or stripped_line == "":
+                continue
+
+            try:
+                if stripped_line.index("//"):
+                    stripped_line = stripped_line[0:stripped_line.index("//")]
+                    stripped_line = stripped_line.strip(" ")
+            except ValueError:
+                pass
+
+            print(stripped_line)
 
     # Are there more tokens in the input? Returns a boolean.
     def has_more_tokens(self):

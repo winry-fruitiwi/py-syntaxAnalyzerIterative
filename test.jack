@@ -1,0 +1,8 @@
+// Hello! I am a test file.
+// This one is a test comment.
+// I say that there should be no grammar rules here.
+// Hello?
+
+let x;
+let y;      // I'm an inline comment!
+let z;
