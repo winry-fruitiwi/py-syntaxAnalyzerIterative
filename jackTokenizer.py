@@ -5,6 +5,9 @@ class JackTokenizer:
         # read every string and remove whitespace, comments, and newlines.
         current_lines = self.jack_input.readlines()
 
+        # a list of "tokens", but these are only separated by spaces
+        current_tokens = []
+
         for line in current_lines:
             stripped_line = line.strip(" ").strip("\n").strip(" ")
 
@@ -19,6 +22,10 @@ class JackTokenizer:
                 pass
 
             print(stripped_line)
+
+            current_tokens.extend(stripped_line.split(' '))
+
+        print(current_tokens)
 
     # Are there more tokens in the input? Returns a boolean.
     def has_more_tokens(self):
