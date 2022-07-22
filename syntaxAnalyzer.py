@@ -7,8 +7,8 @@
 # ☒ fill in constructor and read file
 # ☒ fill in constructor, read file, remove comments/whitespace
 # ☒ remove inline comments as well. used index() instead of find()
-# ☐ create current token and separate each token by a space
-# ☐ print all the tokens
+# ☒ create current token and separate each token by a space
+# ☒ print all the tokens
 # ☐ create dictionary of all terminal rules
 # ☐ iterate through all chars in token, check for additional tokens
 # ☐ identify terminal and non-terminal rules (dict lookup)
@@ -20,6 +20,56 @@
 
 # import statements here
 from jackTokenizer import JackTokenizer
+
+# a full list of all keyword constants possible
+keywords = [
+    'class',
+    'constructor',
+    'function',
+    'method',
+    'field',
+    'static',
+    'var',
+    'int',
+    'char',
+    'boolean',
+    'void',
+    'true',
+    'false',
+    'null',
+    'this',
+    'let',
+    'do',
+    'if',
+    'else',
+    'while',
+    'return'
+]
+
+# full list of symbols
+symbols = [
+    '{',
+    '}',
+    '(',
+    ')',
+    '[',
+    ']',
+    '.',
+    ',',
+    ';',
+    '+',
+    '-',
+    '*',
+    '/',
+    '&',
+    '|',
+    '<',
+    '>',
+    '=',
+    '~'
+]
+
+# we can handle the other three types in our program.
 
 # identify current file/directory here
 
