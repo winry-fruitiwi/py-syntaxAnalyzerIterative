@@ -21,31 +21,6 @@
 # import statements here
 from jackTokenizer import JackTokenizer
 
-# a full list of all keyword constants possible
-keywords = [
-    'class',
-    'constructor',
-    'function',
-    'method',
-    'field',
-    'static',
-    'var',
-    'int',
-    'char',
-    'boolean',
-    'void',
-    'true',
-    'false',
-    'null',
-    'this',
-    'let',
-    'do',
-    'if',
-    'else',
-    'while',
-    'return'
-]
-
 # full list of symbols
 symbols = [
     '{',
