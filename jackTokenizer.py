@@ -54,11 +54,8 @@ class JackTokenizer:
         # read every string and remove whitespace, comments, and newlines.
         current_lines = self.jack_input.readlines()
 
-        # a list of "tokens", but these are only separated by spaces
+        # a list of "tokens", but these are currently only separated by spaces
         current_tokens = []
-
-        # a list of booleans that represent whether I have a keyword
-        keyword_booleans = []
 
         for line in current_lines:
             stripped_line = line.strip(" ").strip("\n").strip(" ")
@@ -73,20 +70,41 @@ class JackTokenizer:
             except ValueError:
                 pass
 
-            print(stripped_line)
+            # print(stripped_line)
 
             current_tokens.extend(stripped_line.split(' '))
 
         for token in current_tokens:
             print(token)
 
+            # if the token is a keyword, print "keyword"
             if token in keywords:
                 print("keyword")
 
+            # a string of numbers we encounter
+            encountered_number_string = ""
+
+            # for every symbol character in token, print "symbol"
             for letter in token:
                 if letter in symbols:
                     print("symbol")
 
+                # otherwise, if the letter is a number, append it to a string
+                # of numbers encountered so far
+
+                try:
+                    if int(letter) or letter == "0":
+                        print(letter)
+                    # encountered_number_string += letter
+                except ValueError:
+                    pass
+                #     if encountered_number_string != "":
+                #         print(encountered_number_string)
+                #         encountered_number_string = ""
+
+                # print(encountered_number_string)
+
+            # spacing between tokens and keywords
             print()
 
     # Are there more tokens in the input? Returns a boolean.
