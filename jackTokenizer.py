@@ -23,6 +23,29 @@ keywords = [
     'return'
 ]
 
+# full list of symbols
+symbols = [
+    '{',
+    '}',
+    '(',
+    ')',
+    '[',
+    ']',
+    '.',
+    ',',
+    ';',
+    '+',
+    '-',
+    '*',
+    '/',
+    '&',
+    '|',
+    '<',
+    '>',
+    '=',
+    '~'
+]
+
 
 class JackTokenizer:
     def __init__(self, jack_input_string):
@@ -55,12 +78,16 @@ class JackTokenizer:
             current_tokens.extend(stripped_line.split(' '))
 
         for token in current_tokens:
-            if token in keywords:
-                keyword_booleans.append(True)
-            else:
-                keyword_booleans.append(False)
+            print(token)
 
-        print(current_tokens + keyword_booleans)
+            if token in keywords:
+                print("keyword")
+
+            for letter in token:
+                if letter in symbols:
+                    print("symbol")
+
+            print()
 
     # Are there more tokens in the input? Returns a boolean.
     def has_more_tokens(self):

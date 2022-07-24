@@ -21,29 +21,6 @@
 # import statements here
 from jackTokenizer import JackTokenizer
 
-# full list of symbols
-symbols = [
-    '{',
-    '}',
-    '(',
-    ')',
-    '[',
-    ']',
-    '.',
-    ',',
-    ';',
-    '+',
-    '-',
-    '*',
-    '/',
-    '&',
-    '|',
-    '<',
-    '>',
-    '=',
-    '~'
-]
-
 # we can handle the other three types in our program.
 
 # identify current file/directory here

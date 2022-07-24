@@ -10,5 +10,5 @@ let z;
 class Hello {
     let a;
     let b;
-    let c;
+    let c=0;
 }
