@@ -72,7 +72,7 @@ class JackTokenizer:
 
             # print(stripped_line)
 
-            current_tokens.extend(stripped_line.split(' '))
+            current_tokens.append(stripped_line)
 
         for token in current_tokens:
             print(token)
@@ -84,10 +84,25 @@ class JackTokenizer:
             # a string of numbers we encounter
             encountered_number_string = ""
 
+            # a string of strings that we encounter, reset after every second
+            # double quote detected
+            string_of_string_constants = ""
+
+            # toggle for including letters in string_of_string_constants
+            string_constant_fabrication = False
+
             # for every symbol character in token, print "symbol"
             for letter in token:
-                if letter in symbols:
+                # a letter is not a symbol if it is a string constant
+                if letter in symbols and not string_constant_fabrication:
                     print("symbol")
+
+                if string_constant_fabrication:
+                    string_of_string_constants += letter
+
+                else:
+                    # print(string_of_string_constants)
+                    string_of_string_constants = ""
 
                 # otherwise, if the letter is a number, append it to a string
                 # of numbers encountered so far
@@ -104,6 +119,11 @@ class JackTokenizer:
                 else:
                     if encountered_number_string != "":
                         print(encountered_number_string)
+
+                # if there is a double quote, that means there will be a string
+                # until the next double quote
+                if letter == '"' and string_constant_fabrication == False:
+                    string_constant_fabrication = True
 
             # spacing between tokens and keywords
             print()
