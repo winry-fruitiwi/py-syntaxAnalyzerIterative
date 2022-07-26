@@ -91,18 +91,19 @@ class JackTokenizer:
 
                 # otherwise, if the letter is a number, append it to a string
                 # of numbers encountered so far
-
                 try:
+                    # bug: int() doesn't classify 0 as an int! use for checking
+                    # if the letter is not an integer
                     if int(letter) or letter == "0":
-                        print(letter)
-                    # encountered_number_string += letter
+                        pass
+                    encountered_number_string += letter
                 except ValueError:
-                    pass
-                #     if encountered_number_string != "":
-                #         print(encountered_number_string)
-                #         encountered_number_string = ""
-
-                # print(encountered_number_string)
+                    if encountered_number_string != "":
+                        print(encountered_number_string)
+                        encountered_number_string = ""
+                else:
+                    if encountered_number_string != "":
+                        print(encountered_number_string)
 
             # spacing between tokens and keywords
             print()

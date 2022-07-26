@@ -9,7 +9,7 @@
 # ☒ remove inline comments as well. used index() instead of find()
 # ☒ create current token and separate each token by a space
 # ☒ print all the tokens
-# ☐ create dictionary of all terminal rules
+# ☒ create dictionary of all terminal rules
 # ☐ iterate through all chars in token, check for additional tokens
 # ☐ identify terminal and non-terminal rules (dict lookup)
 # ☐ identify types of terminal rules
