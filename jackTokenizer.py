@@ -70,8 +70,6 @@ class JackTokenizer:
             except ValueError:
                 pass
 
-            # print(stripped_line)
-
             current_tokens.append(stripped_line)
 
         for token in current_tokens:
@@ -97,12 +95,23 @@ class JackTokenizer:
                 if letter in symbols and not string_constant_fabrication:
                     print("symbol")
 
-                if string_constant_fabrication:
+                # if there is a double quote, that means there will be a string
+                # until the next double quote
+                elif letter == '\"' and not string_constant_fabrication:
+                    string_constant_fabrication = True
+
+                elif letter == '\"' and string_constant_fabrication:
+                    string_constant_fabrication = False
+                    print(string_of_string_constants)
+                    string_of_string_constants = ""
+
+                if string_constant_fabrication and letter != '\"':
                     string_of_string_constants += letter
 
                 else:
-                    # print(string_of_string_constants)
-                    string_of_string_constants = ""
+                    if string_of_string_constants != "":
+                        print(string_of_string_constants)
+                        string_of_string_constants = ""
 
                 # otherwise, if the letter is a number, append it to a string
                 # of numbers encountered so far
@@ -116,16 +125,12 @@ class JackTokenizer:
                     if encountered_number_string != "":
                         print(encountered_number_string)
                         encountered_number_string = ""
-                else:
-                    if encountered_number_string != "":
-                        print(encountered_number_string)
-
-                # if there is a double quote, that means there will be a string
-                # until the next double quote
-                if letter == '"' and string_constant_fabrication == False:
-                    string_constant_fabrication = True
 
             # spacing between tokens and keywords
+
+            print(string_of_string_constants)
+            print(encountered_number_string)
+
             print()
 
     # Are there more tokens in the input? Returns a boolean.
