@@ -3,22 +3,12 @@
 // I say that there should be no grammar rules here.
 // Hello?
 
-let x;
-let y;      // I'm an inline comment!
-let z;
+// let x;
+// let y;      // I'm an inline comment!
+// let z;
 
 class Hello {
     let a;
     let b;
     let c=0;
 }
-
-100
-
-123456789
-
-"Hello world!"
-
-Hello! I'm Winry "awesome" Tian! "there's nothing here" but there is stuff here
-
-"doobadeet" "doobadeet" "doobadeet" doobadeet

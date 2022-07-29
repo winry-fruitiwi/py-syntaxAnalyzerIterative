@@ -75,10 +75,6 @@ class JackTokenizer:
         for token in current_tokens:
             print(token)
 
-            # if the token is a keyword, print "keyword"
-            if token in keywords:
-                print("keyword")
-
             # a string of numbers we encounter
             encountered_number_string = ""
 
@@ -94,12 +90,10 @@ class JackTokenizer:
                 # a letter is not a symbol if it is a string constant
                 if letter in symbols and not string_constant_fabrication:
                     print("symbol")
-
                 # if there is a double quote, that means there will be a string
                 # until the next double quote
                 elif letter == '\"' and not string_constant_fabrication:
                     string_constant_fabrication = True
-
                 elif letter == '\"' and string_constant_fabrication:
                     string_constant_fabrication = False
                     print(string_of_string_constants)
@@ -107,7 +101,6 @@ class JackTokenizer:
 
                 if string_constant_fabrication and letter != '\"':
                     string_of_string_constants += letter
-
                 else:
                     if string_of_string_constants != "":
                         print(string_of_string_constants)
@@ -126,8 +119,21 @@ class JackTokenizer:
                         print(encountered_number_string)
                         encountered_number_string = ""
 
-            # spacing between tokens and keywords
+            # split the token so that we can check for keywords
+            split_tokens = token.split(" ")
 
+            # if the token is a keyword, print "keyword"
+
+            for split_token in split_tokens:
+                if split_token in keywords:
+                    print("keyword")
+                elif split_token in symbols:
+                    print("symbol")
+                else:
+                    print()
+                    print(split_token)
+
+            # spacing between tokens and keywords
             print(string_of_string_constants)
             print(encountered_number_string)
 
