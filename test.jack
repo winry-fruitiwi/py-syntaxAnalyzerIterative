@@ -12,3 +12,5 @@ class Hello {
     let b;
     let c=0;
 }
+
+hello "hello" hello

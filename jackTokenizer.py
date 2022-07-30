@@ -72,8 +72,8 @@ class JackTokenizer:
 
             current_tokens.append(stripped_line)
 
-        for token in current_tokens:
-            print(token)
+        for line in current_tokens:
+            print(line)
 
             # a string of numbers we encounter
             encountered_number_string = ""
@@ -85,11 +85,15 @@ class JackTokenizer:
             # toggle for including letters in string_of_string_constants
             string_constant_fabrication = False
 
+            # the current line without any strings
+            line_without_strings = ""
+
             # for every symbol character in token, print "symbol"
-            for letter in token:
+            for letter in line:
                 # a letter is not a symbol if it is a string constant
                 if letter in symbols and not string_constant_fabrication:
                     print("symbol")
+
                 # if there is a double quote, that means there will be a string
                 # until the next double quote
                 elif letter == '\"' and not string_constant_fabrication:
@@ -105,6 +109,8 @@ class JackTokenizer:
                     if string_of_string_constants != "":
                         print(string_of_string_constants)
                         string_of_string_constants = ""
+                    if letter != '"':
+                        line_without_strings += letter
 
                 # otherwise, if the letter is a number, append it to a string
                 # of numbers encountered so far
@@ -119,12 +125,22 @@ class JackTokenizer:
                         print(encountered_number_string)
                         encountered_number_string = ""
 
+            # check for all double quotes and erase everything in between,
+            # including the double quotes
+            print(line_without_strings)
+
             # split the token so that we can check for keywords
-            split_tokens = token.split(" ")
+            split_tokens = line_without_strings.split(" ")
+
+            split_tokens_without_extra_spaces = []
 
             # if the token is a keyword, print "keyword"
-
             for split_token in split_tokens:
+                if split_token != "":
+                    split_tokens_without_extra_spaces.append(split_token)
+            print(split_tokens_without_extra_spaces)
+
+            for split_token in split_tokens_without_extra_spaces:
                 if split_token in keywords:
                     print("keyword")
                 elif split_token in symbols:
