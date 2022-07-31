@@ -132,13 +132,26 @@ class JackTokenizer:
             # split the token so that we can check for keywords
             split_tokens = line_without_strings.split(" ")
 
+            # split tokens without the extra spaces
             split_tokens_without_extra_spaces = []
 
             # if the token is a keyword, print "keyword"
             for split_token in split_tokens:
-                if split_token != "":
-                    split_tokens_without_extra_spaces.append(split_token)
-            print(split_tokens_without_extra_spaces)
+                symbol_free_token = ""
+
+                for letter in split_token:
+                    if letter in symbols:
+                        pass
+                    else:
+                        symbol_free_token += letter
+
+                if split_token == "":
+                    # split_tokens_without_extra_spaces.append(split_token)
+                    continue
+
+                split_tokens_without_extra_spaces.append(symbol_free_token)
+
+                print(split_tokens_without_extra_spaces)
 
             for split_token in split_tokens_without_extra_spaces:
                 if split_token in keywords:
