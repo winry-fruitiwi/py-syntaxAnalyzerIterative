@@ -1,3 +1,6 @@
+# import the regular expressions module!
+import re
+
 # a full list of all keyword constants possible
 keywords = [
     'class',
@@ -44,6 +47,22 @@ symbols = [
     '>',
     '=',
     '~'
+]
+
+print(re.split("[{}\[\].,;+\-*/&|<>=~]", "{}[].,;+-*/&|<>=~"))
+
+# all possible numbers
+numbers = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9'
 ]
 
 
@@ -135,12 +154,14 @@ class JackTokenizer:
             # split tokens without the extra spaces
             split_tokens_without_extra_spaces = []
 
+            print(re.split("[{}\[\].,;+\-*/&|<>=~ ]", line_without_strings))
+
             # if the token is a keyword, print "keyword"
             for split_token in split_tokens:
                 symbol_free_token = ""
 
                 for letter in split_token:
-                    if letter in symbols:
+                    if letter in symbols or letter in numbers:
                         pass
                     else:
                         symbol_free_token += letter
