@@ -154,7 +154,7 @@ class JackTokenizer:
             # split tokens without the extra spaces
             split_tokens_without_extra_spaces = []
 
-            print(re.split("[{}\[\].,;+\-*/&|<>=~ ]", line_without_strings))
+            split_tokens = re.split("[{}\[\].,;+\-*/&|<>=~ ]", line_without_strings)
 
             # if the token is a keyword, print "keyword"
             for split_token in split_tokens:
@@ -181,8 +181,11 @@ class JackTokenizer:
                     print("symbol")
                 else:
                     print()
-                    print(split_token)
 
+                    try:
+                        print(re.search("[a-zA-Z_]([0-9a-zA-Z_])*", split_token).group())
+                    except AttributeError:
+                        pass
             # spacing between tokens and keywords
             print(string_of_string_constants)
             print(encountered_number_string)
