@@ -69,12 +69,17 @@ class JackTokenizer:
         self.jack_input = open(jack_input_string, "r")
 
         # read every string and remove whitespace, comments, and newlines.
-        current_lines = self.jack_input.readlines()
+        self.current_lines = self.jack_input.readlines()
 
+        self.placeholder()
+
+    # just a placeholder function to check for any dependencies before moving
+    # to the constructor
+    def placeholder(self):
         # a list of "tokens", but these are currently only separated by spaces
         current_tokens = []
 
-        for line in current_lines:
+        for line in self.current_lines:
             stripped_line = line.strip(" ").strip("\n").strip(" ")
 
             if stripped_line[0:2] == "//" or stripped_line == "":
@@ -153,7 +158,8 @@ class JackTokenizer:
             split_tokens_without_extra_spaces = []
 
             # we can use regular expressions to split by tokens
-            split_tokens = re.split("[{}\[\].,;+\-*/&|<>=~ ]", line_without_strings)
+            split_tokens = re.split("[{}\[\].,;+\-*/&|<>=~ ]",
+                                    line_without_strings)
 
             # remove all symbols and numbers
             for split_token in split_tokens:
@@ -184,7 +190,8 @@ class JackTokenizer:
 
                     # if I don't find a match, then this will return an error
                     try:
-                        print(re.search("[a-zA-Z_]([0-9a-zA-Z_])*", split_token).group())
+                        print(re.search("[a-zA-Z_]([0-9a-zA-Z_])*",
+                                        split_token).group())
                     except AttributeError:
                         pass
             # spacing between tokens and keywords
