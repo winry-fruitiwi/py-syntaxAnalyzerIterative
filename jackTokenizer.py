@@ -49,8 +49,6 @@ symbols = [
     '~'
 ]
 
-print(re.split("[{}\[\].,;+\-*/&|<>=~]", "{}[].,;+-*/&|<>=~"))
-
 # all possible numbers
 numbers = [
     '0',
@@ -117,6 +115,9 @@ class JackTokenizer:
                 # until the next double quote
                 elif letter == '\"' and not string_constant_fabrication:
                     string_constant_fabrication = True
+
+                # if we've already encountered a double quote, we need to stop
+                # our current fabrication operation
                 elif letter == '\"' and string_constant_fabrication:
                     string_constant_fabrication = False
                     print(string_of_string_constants)
@@ -148,15 +149,13 @@ class JackTokenizer:
             # including the double quotes
             print(line_without_strings)
 
-            # split the token so that we can check for keywords
-            split_tokens = line_without_strings.split(" ")
-
             # split tokens without the extra spaces
             split_tokens_without_extra_spaces = []
 
+            # we can use regular expressions to split by tokens
             split_tokens = re.split("[{}\[\].,;+\-*/&|<>=~ ]", line_without_strings)
 
-            # if the token is a keyword, print "keyword"
+            # remove all symbols and numbers
             for split_token in split_tokens:
                 symbol_free_token = ""
 
@@ -174,6 +173,7 @@ class JackTokenizer:
 
                 print(split_tokens_without_extra_spaces)
 
+            # detect keywords, symbols, and identifiers
             for split_token in split_tokens_without_extra_spaces:
                 if split_token in keywords:
                     print("keyword")
@@ -182,6 +182,7 @@ class JackTokenizer:
                 else:
                     print()
 
+                    # if I don't find a match, then this will return an error
                     try:
                         print(re.search("[a-zA-Z_]([0-9a-zA-Z_])*", split_token).group())
                     except AttributeError:
