@@ -2,6 +2,9 @@
 # @date 2022.7.11
 # py-jackAnalyzer coding plans - bytelist
 #
+# this project is deprecated and I need to do it recursively in a different
+# project. I might come back to it later.
+#
 # ☒ create project
 # ☒ create shell of all classes
 # ☒ fill in constructor and read file
