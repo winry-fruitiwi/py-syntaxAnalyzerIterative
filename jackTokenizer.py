@@ -68,6 +68,9 @@ class JackTokenizer:
     def __init__(self, jack_input_string):
         self.jack_input = open(jack_input_string, "r")
 
+        # a list of tokens to iterate over
+        self.tokens = []
+
         # read every string and remove whitespace, comments, and newlines.
         self.current_lines = self.jack_input.readlines()
 
@@ -94,8 +97,8 @@ class JackTokenizer:
 
             current_tokens.append(stripped_line)
 
-        for line in current_tokens:
-            print(line)
+        for line_index in range(len(current_tokens)):
+            line = current_tokens[line_index]
 
             # a string of numbers we encounter
             encountered_number_string = ""
@@ -110,19 +113,27 @@ class JackTokenizer:
             # the current line without any strings
             line_without_strings = ""
 
+            # a list of "words" split by spaces
+            words_in_line = line.split(" ")
+            # for word_index in range(len(words_in_line)):
+            # word = words_in_line[word_index]
+
             # for every symbol character in token, print "symbol"
             for letter in line:
-                # a letter is not a symbol if it is a string constant
+                # split_tokens = re.split("[{}\[\].,;+\-*/&|<>=~ ]",
+                #                         words_in_line[word_index])
+
+                # a letter is not a symbol if it is in a string constant
                 if letter in symbols and not string_constant_fabrication:
                     print("symbol")
 
-                # if there is a double quote, that means there will be a string
-                # until the next double quote
+                # if there is a double quote, that means there will be a
+                # string until the next double quote
                 elif letter == '\"' and not string_constant_fabrication:
                     string_constant_fabrication = True
 
-                # if we've already encountered a double quote, we need to stop
-                # our current fabrication operation
+                # if we've already encountered a double quote, we need to
+                # stop our current fabrication operation
                 elif letter == '\"' and string_constant_fabrication:
                     string_constant_fabrication = False
                     print(string_of_string_constants)
@@ -137,22 +148,22 @@ class JackTokenizer:
                     if letter != '"':
                         line_without_strings += letter
 
-                # otherwise, if the letter is a number, append it to a string
-                # of numbers encountered so far
+                # otherwise, if the letter is a number, append it to a
+                # string of numbers encountered so far
                 try:
-                    # bug: int() doesn't classify 0 as an int! use for checking
-                    # if the letter is not an integer
+                    # bug: int() doesn't classify 0 as an int! use for
+                    # checking if the letter is not an integer
                     if int(letter) or letter == "0":
                         pass
                     encountered_number_string += letter
                 except ValueError:
                     if encountered_number_string != "":
                         print(encountered_number_string)
+                        self.tokens.append(encountered_number_string)
                         encountered_number_string = ""
-
             # check for all double quotes and erase everything in between,
             # including the double quotes
-            print(line_without_strings)
+            # print(line_without_strings)
 
             # split tokens without the extra spaces
             split_tokens_without_extra_spaces = []
@@ -160,6 +171,8 @@ class JackTokenizer:
             # we can use regular expressions to split by tokens
             split_tokens = re.split("[{}\[\].,;+\-*/&|<>=~ ]",
                                     line_without_strings)
+
+            print(split_tokens)
 
             # remove all symbols and numbers
             for split_token in split_tokens:
@@ -188,17 +201,23 @@ class JackTokenizer:
                 else:
                     print()
 
-                    # if I don't find a match, then this will return an error
+                    # if I don't find a match, then this will return an
+                    # error
                     try:
                         print(re.search("[a-zA-Z_]([0-9a-zA-Z_])*",
                                         split_token).group())
                     except AttributeError:
                         pass
-            # spacing between tokens and keywords
+
+                self.tokens.append(split_token)
+
             print(string_of_string_constants)
-            print(encountered_number_string)
+
+            if encountered_number_string != "":
+                self.tokens.append(encountered_number_string)
 
             print()
+        print(self.tokens)
 
     # Are there more tokens in the input? Returns a boolean.
     def has_more_tokens(self):
